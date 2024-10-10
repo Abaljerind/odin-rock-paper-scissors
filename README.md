@@ -1,0 +1,1 @@
+This is my third project while I learn frontend developer on The Odin Project. The title of this project is odin-rock-paper-scissors. It only consist of basic HTML & JavaScript for now. I will come back to this repo in a later lesson.
