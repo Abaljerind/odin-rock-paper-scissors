@@ -1,8 +1,8 @@
 function getComputerChoice() {
-  const computerChoice = Math.floor(Math.random() * 10);
-  if (computerChoice < 3) {
+  const computerChoice = Math.floor(Math.random() * 3);
+  if (computerChoice === 0) {
     return "rock";
-  } else if (computerChoice >= 3 && computerChoice <= 6) {
+  } else if (computerChoice === 1) {
     return "paper";
   } else {
     return "scissors";
@@ -14,12 +14,13 @@ function getHumanChoice() {
     "silahkan pilih rock, paper atau scissors:"
   ).toLowerCase();
 
-  if (choice === "rock") {
-    return "rock";
-  } else if (choice === "paper") {
-    return "paper";
-  } else if (choice === "scissors") {
-    return "scissors";
+  if (choice === "rock" || choice === "paper" || choice === "scissors") {
+    return choice;
+  } else {
+    console.log(
+      "Pilihan tidak valid. Harap masukkan rock, paper atau scissors."
+    );
+    return getHumanChoice(); // meminta ulang pilihan jika input tidak valid
   }
 }
 
@@ -57,7 +58,7 @@ function playGame() {
         `You choose ${humanChoice} and Computer choose ${computerChoice}`
       );
       console.log("You lose! Rock beats Scissors");
-      computerChoice++;
+      computerScore++;
     } else if (humanChoice === "scissors" && computerChoice === "paper") {
       console.log(
         `You choose ${humanChoice} and Computer choose ${computerChoice}`
@@ -69,28 +70,16 @@ function playGame() {
         `You choose ${humanChoice} and Computer choose ${computerChoice}`
       );
       console.log("It's a tie");
-    } else {
-      console.log(
-        `You choose ${humanChoice} and Computer choose ${computerChoice}`
-      );
-      console.log("Your input is invalid!");
     }
   }
 
-  const humanSelection = getHumanChoice();
-  const computerSelection = getComputerChoice();
-
-  playRound(humanSelection, computerSelection);
-  playRound(humanSelection, computerSelection);
-  playRound(humanSelection, computerSelection);
-  playRound(humanSelection, computerSelection);
-  playRound(humanSelection, computerSelection);
-
-  console.log(`Score Human ${humanScore} : Computer ${computerScore}`);
+  // looping untuk 5 ronde
+  for (let i = 0; i < 5; i++) {
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+    console.log(`Score Human ${humanScore} : Computer ${computerScore}`);
+  }
 }
 
-playGame();
-playGame();
-playGame();
-playGame();
 playGame();
