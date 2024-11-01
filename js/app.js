@@ -57,19 +57,70 @@ function playGame() {
     }
   }
 
+  // function untuk menampilkan score
+  function displayScore(humanScore, computerScore) {
+    const score = document.createElement("p");
+    score.style.color = "#D5FEF5";
+    score.textContent = `Score: Player ${humanScore} v.s Computer ${computerScore}`;
+    output.appendChild(score);
+  }
+
+  // function untuk mengecek antara player dan computer, mana yang lebih dulu mencapai score 5
+  function checkForWinner(humanScore, computerScore) {
+    if (humanScore === 5) {
+      const p = document.createElement("p");
+      p.textContent = `Congratulations! You beat the computer with score ${humanScore} to ${computerScore}`;
+      output.appendChild(p);
+
+      rockButton.disabled = true;
+      paperButton.disabled = true;
+      scissorsButton.disabled = true;
+
+      replay();
+    }
+
+    if (computerScore === 5) {
+      const p = document.createElement("p");
+      p.textContent = `Losses are part of the game! You lost from the computer with score ${humanScore} to ${computerScore}`;
+      output.appendChild(p);
+
+      rockButton.disabled = true;
+      paperButton.disabled = true;
+      scissorsButton.disabled = true;
+
+      replay();
+    }
+  }
+
+  // function replay untuk mengulang permainan
+  function replay() {
+    setTimeout(() => {
+      const replay = prompt("Do you want to replay? (yes or no)").toLowerCase();
+      if (replay === "yes" || replay === "y") {
+        window.location.reload();
+      }
+    }, 2000);
+  }
+
   rockButton.addEventListener("click", () => {
     const computerChoice = getComputerChoice();
     playRound("rock", computerChoice);
+    displayScore(humanScore, computerScore);
+    checkForWinner(humanScore, computerScore);
   });
 
   paperButton.addEventListener("click", () => {
     const computerChoice = getComputerChoice();
     playRound("paper", computerChoice);
+    displayScore(humanScore, computerScore);
+    checkForWinner(humanScore, computerScore);
   });
 
   scissorsButton.addEventListener("click", () => {
     const computerChoice = getComputerChoice();
     playRound("scissors", computerChoice);
+    displayScore(humanScore, computerScore);
+    checkForWinner(humanScore, computerScore);
   });
 }
 
